@@ -7,22 +7,22 @@ from nltk.corpus import wordnet
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import MultinomialNB
 from xgboost import XGBClassifier
-from keras.models import Sequential
-from keras.layers import Dense, LSTM, Embedding, Bidirectional
+# from keras.models import Sequential
+# from keras.layers import Dense, LSTM, Embedding, Bidirectional
 from sklearn.metrics import classification_report
 from sklearn.metrics import accuracy_score
-import tensorflow as tf
+# import tensorflow as tf
 
 from transformers import BertTokenizer, TFBertForSequenceClassification
-from keras.optimizers import Adam
-from keras.losses import BinaryCrossentropy
-from keras.metrics import BinaryAccuracy
-from keras.callbacks import EarlyStopping
+# from keras.optimizers import Adam
+# from keras.losses import BinaryCrossentropy
+# from keras.metrics import BinaryAccuracy
+# from keras.callbacks import EarlyStopping
 
 
-config = tf.compat.v1.ConfigProto()
-config.gpu_options.allow_growth = True
-session = tf.compat.v1.InteractiveSession(config=config)
+# config = tf.compat.v1.ConfigProto()
+# config.gpu_options.allow_growth = True
+# session = tf.compat.v1.InteractiveSession(config=config)
 # from tensorflow.compat.v1 import InteractiveSession
 # config = ConfigProto()
 # config.gpu_options.allow_growth = True
@@ -185,18 +185,18 @@ models_accuracy['XGBoost']=accuracy_score(y_val,model_xgb.predict(x_val))
 # Load the pre-trained BERT model
 
 # Time for BERT?
-model = TFBertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=1)
-
-# Fine-tune the model
-optimizer = Adam(learning_rate=2e-5)
-loss = BinaryCrossentropy(from_logits=True)
-metric = BinaryAccuracy()
-model.compile(optimizer=optimizer, loss=loss, metrics=[metric])
-es_callback = EarlyStopping(monitor='val_loss', mode='min', patience=3, restore_best_weights=True)
-history = model.fit(x_train, y_train, validation_split=0.2, epochs=5, batch_size=32, callbacks=[es_callback])
-
-loss, acc = model.evaluate(x_test, y_test)
-print(acc)
-
-print(models_accuracy)
+# model = TFBertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=1)
+#
+# # Fine-tune the model
+# optimizer = Adam(learning_rate=2e-5)
+# loss = BinaryCrossentropy(from_logits=True)
+# metric = BinaryAccuracy()
+# model.compile(optimizer=optimizer, loss=loss, metrics=[metric])
+# es_callback = EarlyStopping(monitor='val_loss', mode='min', patience=3, restore_best_weights=True)
+# history = model.fit(x_train, y_train, validation_split=0.2, epochs=5, batch_size=32, callbacks=[es_callback])
+#
+# loss, acc = model.evaluate(x_test, y_test)
+# print(acc)
+#
+# print(models_accuracy)
 

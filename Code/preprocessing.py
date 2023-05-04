@@ -8,13 +8,18 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from sklearn.model_selection import train_test_split
 from nltk.stem import WordNetLemmatizer
+import nltk
+import spacy.cli
+spacy.cli.download("en_core_web_sm")
 
-# nltk.download('wordnet')
-# nltk.download('stopwords')
-#nltk.download('punkt')
+
+spacy.load('en_core_web_sm')
+nltk.download('wordnet')
+nltk.download('stopwords')
+nltk.download('punkt')
 
 data = pd.read_csv("mbti_1.csv")
-print("length of data: "  + str(len(data)))
+print("length of data: " + str(len(data)))
 
 # Remove URL's
 data['posts'] = data['posts'].apply(lambda s: ' '.join(re.sub(r'http\S+', '', s).split()))
